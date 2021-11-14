@@ -44,7 +44,7 @@ async function run() {
 
     })
 
-    // DELETE product api
+    // DELETE Product
     app.delete('/products/:id', async (req, res) => {
         const id = req.params.id;
         const query = { _id: ObjectId(id) };
@@ -53,7 +53,7 @@ async function run() {
         //console.log(result)
     })
 
-    // POST API
+    // POST Order
     app.post('/orders', async (req, res) => {
         const order = req.body;
         const result = await ordersCollection.insertOne(order);
@@ -61,7 +61,7 @@ async function run() {
         res.json(result)
     });
 
-    // GET orders api
+    // GET orders
     app.get('/orders', async (req, res) => {
         const cursor = ordersCollection.find({});
         const orders = await cursor.toArray();
@@ -69,7 +69,7 @@ async function run() {
         res.send(orders);
     })
 
-    // DELETE order api
+    // DELETE orders
     app.delete('/orders/:id', async (req, res) => {
         const id = req.params.id;
         const query = { _id: ObjectId(id) };
@@ -78,7 +78,7 @@ async function run() {
         // console.log(result)
     })
 
-    // POST review api
+    // POST reviews
     app.post('/reviews', async (req, res) => {
         const review = req.body;
         const result = await reviewCollection.insertOne(review)
@@ -86,7 +86,7 @@ async function run() {
         res.json(result);
     })
 
-    // GET review api
+    // GET reviews
     app.get('/reviews', async (req, res) => {
         const cursor = reviewCollection.find({});
         const reviews = await cursor.toArray();
@@ -94,7 +94,7 @@ async function run() {
         //console.log(reviews)
     })
 
-    // users POST api
+    // Users POST
     app.post('/users', async (req, res) => {
         const user = req.body;
         const result = await usersCollection.insertOne(user)
@@ -102,17 +102,17 @@ async function run() {
         console.log("console " ,result)
     })
 
-    // admin UPDATE api
-    app.put('/admin', async (req, res) => {
+    // admin
+    app.put('/users/admin', async (req, res) => {
         //console.log(req.body)
         const filter = { email: req.body.email }
         const updateDoc = { $set: { role: 'admin' } }
         const result = await usersCollection.updateOne(filter, updateDoc)
         res.json(result)
-        //console.log(result)
+        console.log(result)
     })
 
-    // admin check api
+    // admin Check
     app.get('/users/:email', async (req, res) => {
         const email = req.params.email;
         //console.log(email)
